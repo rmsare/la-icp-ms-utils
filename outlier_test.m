@@ -4,6 +4,7 @@ function not_outliers = outlier_test(data, nonblankidx, n, i, k)
     else
         count = data(:,i);
     end
+    
     t = data(nonblankidx, 1);
     count = count(nonblankidx, :); % test only against non-blank section of scan
     med = median(count);
@@ -12,7 +13,6 @@ function not_outliers = outlier_test(data, nonblankidx, n, i, k)
     rng = q3 - q1;
     
     not_outliers = find((count >= q1 - (n/2)*rng) & (count <= q3 + (n/2)*rng));
-    %accepted_data = data(not_outliers, :);
     
     figure(k)
     subplot(3,2,i-1)
@@ -20,5 +20,5 @@ function not_outliers = outlier_test(data, nonblankidx, n, i, k)
     plot(t, count, 'b+')
     plot(t(not_outliers), count(not_outliers), 'r+')
     
-    not_outliers = not_outliers + nanmin(nonblankidx);
+    not_outliers = not_outliers + nanmin(nonblankidx); % tansform to indices for main data vector
 end
