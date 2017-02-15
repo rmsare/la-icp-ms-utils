@@ -15,7 +15,5 @@ function [data, k] = read_counts(filename, nonblankidx)
         ylabel(names(i+1))
         xlabel('time')
     end
-    
-    %total_counts = sum(data(nonblankidx, 2:7), 2);
-    %data = data(nonblankidx, :);
+
 end
