@@ -11,7 +11,7 @@ function filter_all_counts(directory)
             % take indices as user input for now
             nonblankidx = 143:290; % change this for different analysis times
             
-            [data, k] = read_counts(infilename, nonblankidx);
+            [data, k] = read_counts(infilename);
             not_outliers = outlier_test(data, nonblankidx, 3, 0, k);
             save_counts(infilename, data, not_outliers, nonblankidx);
         end
