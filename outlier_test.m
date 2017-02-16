@@ -1,5 +1,5 @@
 function not_outliers = outlier_test(data, nonblankidx, n, i, k)
-    if(i == 0)
+    if(i == 0) % placeholder for testing against sum of all counts
         count = sum(data(:, 5:7), 2);
     else
         count = data(:,i);
@@ -20,5 +20,5 @@ function not_outliers = outlier_test(data, nonblankidx, n, i, k)
     plot(t, count, 'b+')
     plot(t(not_outliers), count(not_outliers), 'r+')
     
-    not_outliers = not_outliers + nanmin(nonblankidx); % tansform to indices for main data vector
+    not_outliers = not_outliers + nanmin(nonblankidx); % transform to indices for main data vector
 end
