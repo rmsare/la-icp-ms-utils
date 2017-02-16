@@ -1,9 +1,9 @@
 function filter_all_counts(directory)
     filelist = dir(directory);
     
-    for(i=3:numel(filelist))
+    for(i=1:numel(filelist))
         infilename = filelist(i).name;
-        if(strcmp(infilename(end-3:end), 'FIN2'))
+        if(numel(infilename) > 2 && strcmp(infilename(end-3:end), 'FIN2'))
             infilename = strcat(directory, infilename);
             
             % eventuall replace with function for finding active readings (not background)
