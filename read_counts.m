@@ -1,4 +1,4 @@
-function [data, k] = read_counts(filename, nonblankidx)
+function [data, k] = read_counts(filename)
     data = csvread(filename, 8, 0);
     t = data(:,1);
     names = {'Time','Hg201','Hg202','Pb204','Pb206','Pb207','Pb208'};
