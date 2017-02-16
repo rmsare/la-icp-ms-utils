@@ -1,8 +1,7 @@
 function save_counts(infilename, data, not_outliers, nonblankidx)
     outfilename = strcat(infilename(1:end-5), '_new', infilename(end-4:end));
     
-    infid = fopen(infilename, 'r');
-    outfid = fopen(outfilename, 'wt');
+    write_header(infilename, outfilename);
 
     % retain baseline counts before and after main reading
     startidx = nonblankidx(1);
@@ -12,48 +11,7 @@ function save_counts(infilename, data, not_outliers, nonblankidx)
 
     % append baseline data to filtered counts
     output_data = [start_baseline; data(not_outliers, :); end_baseline];
-
-    line = textscan(infid, '%s %s %s %s %s', 1);
-    for(string=line)
-        fwrite(outfid, cell2mat(string{1}));
-        fwrite(outfid, ' ');
-    end
-    fprintf(outfid, '\n');
     
-    line = textscan(infid, '%s %s %s %s %s', 1);
-    for(string=line)
-        fwrite(outfid, cell2mat(string{1}));
-        fwrite(outfid, ' ');
-    end
-    fprintf(outfid, '\n');
-
-    line = textscan(infid, '%s', 1);
-    fwrite(outfid, cell2mat(line{1}));
-    fprintf(outfid, '\n');
-
-    line = textscan(infid, '%s', 1);
-    fwrite(outfid, cell2mat(line{1}));
-    fprintf(outfid, '\n');
-    
-    line = textscan(infid, '%s', 1);
-    fwrite(outfid, cell2mat(line{1}));
-    fprintf(outfid, '\n');
-    
-    line = textscan(infid, '%s', 1);
-    fwrite(outfid, cell2mat(line{1}));
-    fprintf(outfid, '\n');
-    
-    line = textscan(infid, '%s', 1);
-    fwrite(outfid, cell2mat(line{1}));
-    fprintf(outfid, '\n');
-    
-    line = textscan(infid, '%s', 1);
-    fwrite(outfid, cell2mat(line{1}));
-    fprintf(outfid, '\n');
-    
-    fclose(infid);
-    fclose(outfid);
-   
-    
+    % append to file
     dlmwrite(outfilename, output_data, '-append', 'precision', 16);
 end
