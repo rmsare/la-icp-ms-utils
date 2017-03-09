@@ -1,7 +1,6 @@
 function not_outliers = outlier_test(data, nonblankidx, n, i, k)
     if(i == 0) % placeholder for testing against sum of all counts
         count = sum(data(:, 5:7), 2);
-        i = 4;
     else
         count = data(:,i);
     end
@@ -15,11 +14,20 @@ function not_outliers = outlier_test(data, nonblankidx, n, i, k)
     
     not_outliers = find((count >= q1 - (n/2)*rng) & (count <= q3 + (n/2)*rng));
     
-    figure(k)
-    subplot(3,2,i-1)
-    hold on
-    plot(t, count, 'b+')
-    plot(t(not_outliers), count(not_outliers), 'r+')
+    if(i ~= 0)
+        figure(k)
+        subplot(3,2,i-1)
+        hold on
+        plot(t, count, 'b+')
+        plot(t(not_outliers), count(not_outliers), 'r+')
+    else
+        figure
+        hold on
+        plot(t, count, 'b+')
+        plot(t(not_outliers), count(not_outliers), 'r+')
+        xlabel('time')
+        ylabel('Total counts')
+    end
     
     not_outliers = not_outliers + nanmin(nonblankidx); % transform to indices for main data vector
 end
