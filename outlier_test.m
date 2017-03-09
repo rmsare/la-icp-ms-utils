@@ -1,6 +1,7 @@
 function not_outliers = outlier_test(data, nonblankidx, n, i, k)
     if(i == 0) % placeholder for testing against sum of all counts
         count = sum(data(:, 5:7), 2);
+        i = 4;
     else
         count = data(:,i);
     end
