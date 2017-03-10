@@ -1,4 +1,10 @@
 function not_outliers = outlier_test(data, nonblankidx, n, i, k)
+    if(nargin <3)
+        n = 3; % standard Tukey outlier test: 1.5 IQR
+        i = 0; % test sum of counts
+        k =1;
+    end
+
     if(i == 0) % placeholder for testing against sum of all counts
         count = sum(data(:, 5:7), 2);
     else
@@ -10,7 +16,7 @@ function not_outliers = outlier_test(data, nonblankidx, n, i, k)
     med = median(count);
     q1 = prctile(count, 25);
     q3 = prctile(count, 75);
-    rng = q3 - q1;
+    rng = q3 - q1; % IQR
     
     not_outliers = find((count >= q1 - (n/2)*rng) & (count <= q3 + (n/2)*rng));
     
